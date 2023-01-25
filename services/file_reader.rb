@@ -1,7 +1,15 @@
 class FileReader
-  def self.read(file_name)
-    File.read(file_name)
-  rescue Errno::ENOENT
-    nil
+  attr_reader :file_path
+
+  def initialize(file_path)
+    @file_path = file_path
+  end
+
+  def read
+    exists? && File.read(file_path)
+  end
+
+  def exists?
+    File.file?(file_path) || raise Errors::File::NoSuchFile.new(file_path)
   end
 end
