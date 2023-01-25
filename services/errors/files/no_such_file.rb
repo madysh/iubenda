@@ -1,6 +1,8 @@
+require_relative "../base"
+
 class Errors
   class File
-    class NoSuchFile < StandardError
+    class NoSuchFile < Errors::Base
       attr_reader :file_path
 
       def initialize(file_path)

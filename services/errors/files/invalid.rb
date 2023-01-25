@@ -1,6 +1,8 @@
+require_relative "../base"
+
 class Errors
   class File
-    class Invalid < StandardError
+    class Invalid < Errors::Base
       def initialize(msg="Invalid file")
         super
       end
