@@ -10,14 +10,14 @@ class DataLoader
   def load
     require 'json'
 
-    JSON.parse(file, object_class: @klass)
+    JSON.parse(file, object_class: klass)
   rescue JSON::ParserError
-    raise Errors::File::Invalid, "File #{file_path} is invalid"
+    raise Errors::File::Invalid, "File #{file_path} is invalid json"
   end
 
   private
 
-  attr_reader :file_path
+  attr_reader :file_path, :klass
 
   def file
     FileReader.new(file_path).read
