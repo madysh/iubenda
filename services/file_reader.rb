@@ -1,3 +1,5 @@
+require_relative "./errors/file/no_such_file"
+
 class FileReader
   attr_reader :file_path
 
