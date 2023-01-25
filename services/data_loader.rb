@@ -1,11 +1,9 @@
-require_relative "./errors/file/Invalid"
+require_relative "./errors/files/invalid"
 require_relative "./file_reader"
 
 class DataLoader
-  DATA_FOLDER = './data/'.freeze
-
-  def initialize(file_name, klass)
-    @file_name = file_name
+  def initialize(file_path, klass)
+    @file_path = file_path
     @klass = klass
   end
 
@@ -14,14 +12,12 @@ class DataLoader
 
     JSON.parse(file, object_class: @klass)
   rescue JSON::ParserError
-    raise Errors::File::Invalid, "#{file_path} is invalid"
+    raise Errors::File::Invalid, "File #{file_path} is invalid"
   end
 
   private
 
-  def file_path
-    "#{DATA_FOLDER}#{@file_name}.json"
-  end
+  attr_reader :file_path
 
   def file
     FileReader.new(file_path).read
