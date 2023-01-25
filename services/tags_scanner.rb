@@ -1,3 +1,5 @@
+require_relative "./errors/invalid_argument"
+
 class TagsScanner
   PATTERNS = [
     CLAUSE_PATTERN = /\[CLAUSE-(\d+)\]/,
@@ -22,6 +24,6 @@ class TagsScanner
     {
       clause: CLAUSE_PATTERN,
       section: SECTION_PATTERN,
-    }[type]
+    }[type] || raise(Errors::InvalidArgument, "TagsScanner does not support #{type} type")
   end
 end
