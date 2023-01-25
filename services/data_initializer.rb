@@ -9,8 +9,8 @@ class DataInitializer
 
   def load
     {
-      clauses: clauses,
-      sections: sections,
+      clauses: load_data("clauses", ::Clause),
+      sections: load_data("sections", ::Section),
       template: template
     }
   end
@@ -27,14 +27,8 @@ class DataInitializer
     Template.new(text)
   end
 
-  def clauses
-    data = DataLoader.new(file_path("clauses.json"), ::Clause).load
-
-    data_to_hash(data)
-  end
-
-  def sections
-    data = DataLoader.new(file_path("sections.json"), ::Section).load
+  def load_data(file_name, klass)
+    data = DataLoader.new(file_path("#{file_name}.json"), klass).load
 
     data_to_hash(data)
   end

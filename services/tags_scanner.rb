@@ -9,11 +9,19 @@ class TagsScanner
   end
 
   def scan_ids(type)
-    pattern = {
+    pattern = pattern(type)
+
+    text.scan(pattern).flatten.map(&:to_i).uniq
+  end
+
+  private
+
+  attr_reader :text
+
+  def pattern(type)
+    {
       clause: CLAUSE_PATTERN,
       section: SECTION_PATTERN,
     }[type]
-
-    @text.scan(pattern).flatten.map(&:to_i).uniq
   end
 end
