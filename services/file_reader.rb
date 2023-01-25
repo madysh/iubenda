@@ -1,4 +1,4 @@
-require_relative "./errors/file/no_such_file"
+require_relative "./errors/files/no_such_file"
 
 class FileReader
   attr_reader :file_path
@@ -12,6 +12,6 @@ class FileReader
   end
 
   def exists?
-    File.file?(file_path) || raise Errors::File::NoSuchFile.new(file_path)
+    File.file?(file_path) || raise(Errors::File::NoSuchFile.new(file_path))
   end
 end
