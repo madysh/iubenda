@@ -17,8 +17,8 @@ describe DataLoader do
       end
     end
 
-    shared_examples "with Errors::InvalidArgument error" do
-      it "raises Errors::InvalidArgument error" do
+    shared_examples "with Errors::File::Invalid error" do
+      it "raises Errors::File::Invalid error" do
         expect { subject }
           .to raise_error(Errors::File::Invalid, "File #{file_path} is invalid json")
       end
@@ -27,13 +27,13 @@ describe DataLoader do
     context "with path to invalid json file" do
       let(:file_name) { "invalid_json.json" }
 
-      it_behaves_like "with Errors::InvalidArgument error"
+      it_behaves_like "with Errors::File::Invalid error"
     end
 
     context "with path to not json file" do
       let(:file_name) { "txt_example.txt" }
 
-      it_behaves_like "with Errors::InvalidArgument error"
+      it_behaves_like "with Errors::File::Invalid error"
     end
   end
 end
