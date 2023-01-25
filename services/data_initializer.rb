@@ -28,10 +28,18 @@ class DataInitializer
   end
 
   def clauses
-    DataLoader.new(file_path("clauses.json"), ::Clause).load
+    data = DataLoader.new(file_path("clauses.json"), ::Clause).load
+
+    data_to_hash(data)
   end
 
   def sections
-    DataLoader.new(file_path("sections.json"), ::Section).load
+    data = DataLoader.new(file_path("sections.json"), ::Section).load
+
+    data_to_hash(data)
+  end
+
+  def data_to_hash(data)
+    data.to_h { |i| [i.id, i] }
   end
 end
